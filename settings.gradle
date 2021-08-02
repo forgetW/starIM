@@ -1,0 +1,5 @@
+//include ':lib_common'
+//include ':push_service'
+//include ':imsdk'
+include ':app'
+rootProject.name = "starIm"

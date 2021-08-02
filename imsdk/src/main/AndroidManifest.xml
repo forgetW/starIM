@@ -1,0 +1,503 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.qunar.im.ui">
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.VIBRATE" /> <!-- <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_GPS" />
+    <uses-permission android:name="android.permission.ACCESS_ASSISTED_GPS" />
+    <uses-permission android:name="android.permission.ACCESS_LOCATION" />
+
+    <application>
+        <activity android:name=".activity.ReceiveTalkActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+
+        <receiver
+            android:name=".broadcastreceivers.MeetingSendReceiver"
+            android:enabled="true"
+            android:exported="true"></receiver>
+        <receiver android:name="com.wit.nmg.utils.NotificationClickReceiver" />
+
+        <provider
+            android:name=".util.easyphoto.easyphotos.utils.provider.EasyPhotosFileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths_public" />
+        </provider>
+
+        <activity
+            android:name=".util.easyphoto.easyphotos.ui.EasyPhotosActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/EasyPhotosTheme" />
+        <activity
+            android:name=".util.easyphoto.easyphotos.ui.PreviewActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/EasyPhotosFullscreenTheme" />
+        <activity
+            android:name=".util.easyphoto.easyphotos.ui.PuzzleActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/EasyPhotosTheme"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".util.easyphoto.easyphotos.ui.PuzzleSelectorActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/EasyPhotosTheme" />
+        <activity
+            android:name=".util.easyphoto.easyphotos.ui.EasyCameraActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:theme="@style/EasyPhotosTheme">
+            <meta-data
+                android:name="android.max_aspect"
+                android:value="2.4" />
+            <!-- 适配华为（huawei）刘海屏 -->
+            <meta-data
+                android:name="android.notch_support"
+                android:value="true" />
+            <!-- 适配小米（xiaomi）刘海屏 -->
+            <meta-data
+                android:name="notch.config"
+                android:value="portrait|landscape" />
+        </activity>
+        <activity
+            android:name="com.yalantis.ucrop.UCropActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+
+        <meta-data
+            android:name="com.qunar.im.ui.view.bigimageview.glide.engine.OkHttpProgressGlideModule"
+            android:value="GlideModule" /> <!-- pb协议用单聊界面 -->
+        <!-- android:theme="@style/horizontal_slide" -->
+        <activity
+            android:name=".activity.PbChatActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/AtomSplashTheme"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".activity.PbChatLocalSearchActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:launchMode="standard"
+            android:screenOrientation="portrait"
+            android:theme="@style/AtomSplashTheme"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".activity.PbChatSearchResultActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:launchMode="standard"
+            android:screenOrientation="portrait"
+            android:theme="@style/AtomSplashTheme"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".activity.ShareLocationActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AtomSplashTheme" />
+        <activity
+            android:name=".activity.ManageEmojiconActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AtomSplashTheme" />
+        <activity
+            android:name=".activity.CalculateCacheActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/AtomSplashTheme" />
+        <activity
+            android:name=".activity.QTalkUserLoginActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/AtomSplashTheme"
+            android:windowSoftInputMode="stateVisible|adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="start_nav_config"
+                    android:scheme="startalk" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.QtalkUserHostActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AtomSplashTheme"
+            android:windowSoftInputMode="stateVisible|adjustPan" />
+        <activity
+            android:name=".activity.RobotChatActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/AtomSplashTheme"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".activity.RobotExtendChatActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AtomSplashTheme"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".activity.EditPictureActivity"
+            android:theme="@style/AtomSplashTheme" />
+        <activity
+            android:name=".activity.DownloadFileActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/AtomSplashTheme" />
+        <activity
+            android:name=".activity.ReadToDestroyActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AtomSplashTheme" />
+        <activity
+            android:name=".activity.LoginActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/AtomSplashTheme"
+            android:windowSoftInputMode="stateVisible|adjustPan" />
+        <activity
+            android:name=".activity.SettingActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/AtomSplashTheme" />
+        <activity
+            android:name=".activity.AtListActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AtomSplashTheme" />
+        <activity
+            android:name=".activity.CloudChatRecordActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/AtomSplashTheme" />
+        <activity
+            android:name=".activity.ImageClipActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/AtomSplashTheme" />
+        <activity
+            android:name=".activity.ImageBrowersingActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/NoTitleTranslucentTheme" />
+        <activity
+            android:name=".activity.ChatroomInfoActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/AtomSplashTheme" />
+        <activity
+            android:name=".activity.ChatroomMembersActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/AtomSplashTheme" />
+        <activity
+            android:name=".activity.QRActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/AtomSplashTheme" />
+        <activity
+            android:name=".custom.UserCardActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AtomSplashTheme" />
+        <activity
+            android:name=".activity.PictureSelectorActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AtomSplashTheme" />
+        <activity
+            android:name=".imagepicker.ui.ImageGridActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/ImagePickerTheme" />
+        <activity
+            android:name=".imagepicker.ui.ImageCropActivity"
+            android:configChanges="orientation|screenSize"
+            android:hardwareAccelerated="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/ImagePickerTheme" />
+        <activity
+            android:name=".imagepicker.ui.ImagePreviewActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/ImagePickerThemeFullScreen" />
+        <activity
+            android:name=".imagepicker.ui.ImagePreviewDelActivity"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/ImagePickerThemeFullScreen" />
+        <activity
+            android:name=".view.camera.CameraActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AtomSplashTheme" />
+        <activity
+            android:name=".activity.CustomCaptureActvity"
+            android:screenOrientation="portrait"
+            android:stateNotNeeded="true"
+            android:theme="@style/AtomSplashTheme"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name=".activity.FlutterMedalActivity"
+            android:screenOrientation="portrait"
+            android:stateNotNeeded="true"
+            android:theme="@style/FlutterTheme"
+            android:windowSoftInputMode="stateAlwaysHidden">
+            <meta-data
+                android:name="io.flutter.app.android.SplashScreenUntilFirstFrame"
+                android:value="true" />
+        </activity> <!-- <activity -->
+        <!-- android:name="com.qunar.im.ui.schema.QchatSchemeActivity" -->
+        <!-- android:configChanges="orientation|keyboardHidden" -->
+        <!-- android:screenOrientation="portrait"> -->
+        <!-- <intent-filter> -->
+        <!-- <action android:name="android.intent.action.VIEW" /> -->
+        <!-- <category android:name="android.intent.category.DEFAULT" /> -->
+        <!-- <category android:name="android.intent.category.BROWSABLE"/> -->
+        <!-- <data android:scheme="${SCHEME}" android:host="qunarchat" /> -->
+        <!-- </intent-filter> -->
+        <!-- </activity> -->
+        <activity
+            android:name=".activity.ChatRoomActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/AtomSplashTheme" />
+        <activity
+            android:name=".activity.LocalChatRecordActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AtomSplashTheme" />
+        <activity
+            android:name=".activity.SearchChatingActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AtomSplashTheme"
+            android:windowSoftInputMode="stateVisible|adjustResize" />
+        <activity
+            android:name=".activity.LocationActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AtomSplashTheme" />
+        <activity
+            android:name=".activity.AddEmotionActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AtomSplashTheme" />
+        <activity
+            android:name=".activity.VideoPlayerActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:theme="@style/AtomSplashTheme" />
+        <activity
+            android:name=".activity.AnswerRequestActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AtomSplashTheme" />
+        <activity
+            android:name=".activity.BugreportActivity"
+            android:theme="@style/AtomSplashTheme" />
+        <activity
+            android:name=".activity.VideoSelectorActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AtomSplashTheme" />
+        <activity
+            android:name=".activity.FragmentActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AtomSplashTheme" />
+        <activity
+            android:name=".activity.NavConfigActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AtomSplashTheme"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity
+            android:name=".activity.NavConfigQRActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AtomSplashTheme"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity
+            android:name=".activity.NavConfigAddActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AtomSplashTheme"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity
+            android:name=".activity.CountrySelectorActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AtomSplashTheme" />
+        <activity
+            android:name=".activity.QChatLoginActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/NoTitleTranslucentTheme" />
+        <activity
+            android:name=".activity.ChatroomMemeberManagerActivity"
+            android:screenOrientation="portrait" />
+        <!--             android:theme="@style/NoTitleTranslucentTheme" -->
+        <activity
+            android:name=".activity.MyFilesActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/AtomSplashTheme" />
+        <activity
+            android:name=".activity.MyFilesDetailActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/AtomSplashTheme" />
+        <activity
+            android:name=".activity.DailyPasswordBoxMainActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AtomSplashTheme" />
+        <activity
+            android:name=".activity.DailyPasswordBoxSubActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AtomSplashTheme" />
+        <activity
+            android:name=".activity.DailyPasswordBoxSubEditActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AtomSplashTheme" />
+        <activity
+            android:name=".activity.DailyToDoListActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AtomSplashTheme" />
+        <activity
+            android:name=".activity.DailyToDoListCreateActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AtomSplashTheme" />
+        <activity
+            android:name=".activity.DailyNoteEditorActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AtomSplashTheme"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".activity.CollectionChatActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/AtomSplashTheme" /> <!-- 代收Activity -->
+        <activity
+            android:name=".activity.AccountSwitchActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AtomSplashTheme" /> <!-- 代收会话详情页 -->
+        <activity
+            android:name=".activity.AppiumTestActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AtomSplashTheme" />
+        <activity
+            android:name=".activity.CodeActivty"
+            android:screenOrientation="portrait"
+            android:theme="@style/AtomSplashTheme" />
+        <activity
+            android:name=".activity.WorkWorldReleaseCircleActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:fitsSystemWindows="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/AtomSplashTheme"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".activity.WorkWorldSearchActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AtomSplashTheme" />
+        <activity
+            android:name=".activity.WorkWorldActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AtomSplashTheme" />
+        <activity
+            android:name=".activity.WorkWorldDetailsActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AtomSplashTheme" />
+        <activity
+            android:name=".activity.WorkWorldNoticeActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AtomSplashTheme" />
+        <activity
+            android:name=".activity.WorkWorldAtListActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AtomSplashTheme" />
+        <activity
+            android:name=".activity.IdentitySelectActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AtomSplashTheme" />
+        <activity
+            android:name=".activity.BackgroundTipActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/AtomSplashTheme" />
+        <activity
+            android:name=".activity.SearchChatPicVideoActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AtomSplashTheme" />
+        <activity
+            android:name=".activity.FindPwdStep1Activity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AtomSplashTheme" />
+        <activity
+            android:name=".activity.FindPwdStep2Activity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AtomSplashTheme" />
+        <activity
+            android:name=".activity.FindPwdStep3Activity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AtomSplashTheme" />
+        <activity
+            android:name=".view.bigimageview.view.ImagePreviewActivity"
+            android:theme="@style/Theme.ImagePreview" /> <!-- <meta-data -->
+        <!-- android:name="com.qunar.im.ui.view.bigimageview.glide.engine.OkHttpProgressGlideModule" -->
+        <!-- android:value="GlideModule" /> -->
+        <!-- <provider -->
+        <!-- android:name="com.qunar.im.ui.util.easyphoto.easyphotos.utils.provider.EasyPhotosFileProvider" -->
+        <!-- android:authorities="${applicationId}.provider" -->
+        <!-- android:exported="false" -->
+        <!-- android:grantUriPermissions="true"> -->
+        <!-- <meta-data -->
+        <!-- android:name="android.support.FILE_PROVIDER_PATHS" -->
+        <!-- android:resource="@xml/file_paths_public" /> -->
+        <!-- </provider> -->
+        <provider
+            android:name=".imagepicker.ImagePickerProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.fileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
+
+        <receiver
+            android:name=".broadcastreceivers.ConnectionStateReceiver"
+            android:label="NetworkConnStatusChgd" />
+        <receiver android:name=".broadcastreceivers.PushReceiver">
+            <intent-filter>
+                <action android:name="com.qunar.ops.push.START_ACTIVITY" />
+                <action android:name="com.qunar.ops.push.MSG_ARRIVED" />
+                <action android:name="com.qunar.ops.push.CLEAR_NOTIFY" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name=".broadcastreceivers.ShareReceiver">
+            <intent-filter>
+                <action android:name="com.qunar.im.SHARE" />
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:name=".services.PullPatchService"
+            android:exported="false" />
+        <service
+            android:name=".services.PullPasswordBoxService"
+            android:exported="false" />
+        <service
+            android:name="com.qunar.im.core.services.ClearLogService"
+            android:exported="false" />
+        <service
+            android:name="com.qunar.im.core.services.FeedBackServcie"
+            android:exported="false" />
+        <service
+            android:name="com.baidu.location.f"
+            android:enabled="true"
+            android:process=":remote" />
+    </application>
+
+</manifest>
