@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.wit</groupId>
+  <artifactId>qtalk_push</artifactId>
+  <version>1.0.1</version>
+  <packaging>aar</packaging>
+  <dependencies>
+    <dependency>
+      <groupId>mpass_cqgzy_v8</groupId>
+      <artifactId>qtalk_common</artifactId>
+      <version>unspecified</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>de.greenrobot</groupId>
+      <artifactId>eventbus</artifactId>
+      <version>2.2.1</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.huawei.hms</groupId>
+      <artifactId>push</artifactId>
+      <version>3.0.3.301</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.meizu.flyme.internet</groupId>
+      <artifactId>push-internal</artifactId>
+      <version>3.8.4</version>
+      <scope>compile</scope>
+    </dependency>
+  </dependencies>
+</project>
