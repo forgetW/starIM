@@ -2,7 +2,6 @@ package com.kotlin.starim;
 
 import android.app.Application;
 
-import com.qunar.im.ui.sdk.QIMSdk;
 
 public class App extends Application {
 
@@ -10,6 +9,5 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
 
-        QIMSdk.getInstance().init(this);
     }
 }
