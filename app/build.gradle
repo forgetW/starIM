@@ -13,6 +13,7 @@ android {
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
+        ndk {abiFilters "armeabi"} //真机 + 模拟器，谈性能？不如喂狗
     }
 
     buildTypes {
@@ -28,6 +29,9 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    buildFeatures {
+        viewBinding true
+    }
 }
 
 dependencies {
@@ -38,5 +42,7 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.3.0'
     implementation 'com.google.android.material:material:1.3.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    //腾讯X5浏览器内核
+    implementation 'com.tencent.tbs.tbssdk:sdk:43967'
     implementation fileTree(dir: 'libs', include: ['*.aar', '*.jar'], exclude: [])
 }

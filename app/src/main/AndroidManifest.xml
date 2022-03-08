@@ -16,13 +16,30 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.StarIm">
-        <activity android:name=".PdfViewActivity"></activity>
+        <activity
+            android:name=".FullscreenActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_fullscreen"
+            android:theme="@style/Theme.StarIm.Fullscreen">
+        </activity>
+        <activity android:name=".PdfViewActivity" />
         <activity android:name=".MainActivity">
+
+        </activity>
+
+        <activity
+            android:name=".SplashActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+            <meta-data
+                android:name="android.notch_support"
+                android:value="true" />
         </activity>
     </application>
 
