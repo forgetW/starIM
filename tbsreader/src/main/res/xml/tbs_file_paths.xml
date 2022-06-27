@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<paths>
+    <external-files-path
+        name="download"
+        path="witupgrade" />
+    <external-path
+        name="download_sdcard"
+        path="ExtDataTunnel/files/witupgrade" />
+
+    <root-path
+        name="files"
+        path="." />
+
+    <!--表示Environment.getExternalStorageDirectory() 指向的目录-->
+    <external-path name="external_storage_root" path="." />
+</paths>

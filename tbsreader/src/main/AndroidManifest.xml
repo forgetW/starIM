@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.kotlin.tbsreader">
+
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <application>
+        <activity android:name=".activity.IntentActivity"></activity>
+        <activity
+            android:name=".activity.FilePreActivity"
+            android:theme="@style/fileTheme">
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.BROWSABLE" />
+                <!-- app://${applicationId}/filePreview?fileUrl= -->
+                <data
+                    android:host="${app_name}"
+                    android:path="/filePreview"
+                    android:scheme="app" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".news.PreviewActivity"/>
+
+        <service
+            android:name="com.tencent.smtt.export.external.DexClassLoaderProviderService"
+            android:label="dexopt"
+            android:process=":dexopt" />
+        <service android:name=".service.RestartService" />
+
+        <activity
+            android:name=".activity.FileDisplayActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar">
+
+            <!-- <intent-filter> -->
+            <!-- <category android:name="android.intent.category.DEFAULT" /> -->
+
+
+            <!-- <action android:name="android.intent.action.VIEW" /> -->
+
+
+            <!-- <category android:name="android.intent.category.BROWSABLE" /> -->
+
+
+            <!-- &lt;!&ndash; 在data里设置了scheme和host，则该Activity可以接收和处理类似于"data://main/XXX"的链接 &ndash;&gt; -->
+            <!-- &lt;!&ndash; "zhyf://wit/path?fileUrl="; &ndash;&gt; -->
+            <!-- &lt;!&ndash; app://locahost/filePreview?fileUrl= &ndash;&gt; -->
+            <!-- &lt;!&ndash; app://${applicationId}/filePreview?fileUrl= &ndash;&gt; -->
+            <!-- <data -->
+            <!-- android:host="${app_name}" -->
+            <!-- android:path="/filePreview" -->
+            <!-- android:scheme="app" /> -->
+            <!-- </intent-filter> -->
+        </activity>
+        <activity android:name=".web.WebActivity" />
+
+        <provider
+            android:name=".utils.TbsFileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true"
+            tools:replace="android:authorities">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/tbs_file_paths"
+                tools:replace="android:resource" />
+        </provider>
+    </application>
+
+</manifest>

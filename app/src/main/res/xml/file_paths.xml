@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<paths>
+  <external-files-path
+    name="download"
+    path="witupgrade" />
+  <external-path
+    name="download_sdcard"
+    path="ExtDataTunnel/files/witupgrade" />
+
+  <root-path
+    name="files"
+    path="." />
+  <cache-path
+    name="cached_files"
+    path="." />
+
+  <cache-path
+    name="cache"
+    path="share_plus/" />
+</paths>

@@ -8,12 +8,13 @@ android {
     buildToolsVersion "30.0.3"
 
     defaultConfig {
-        applicationId "com.kotlin.starim"
+        applicationId "com.kotlin.star"
         minSdkVersion 21
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
-        ndk {abiFilters "armeabi"} //真机 + 模拟器，谈性能？不如喂狗
+        manifestPlaceholders = [app_name: 'starim', appAuthRedirectScheme: 'com.kotlin.starim']
+//        ndk {abiFilters "armeabi"} //真机 + 模拟器，谈性能？不如喂狗
     }
 
     buildTypes {
@@ -42,7 +43,7 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.3.0'
     implementation 'com.google.android.material:material:1.3.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
-    //腾讯X5浏览器内核
-    implementation 'com.tencent.tbs.tbssdk:sdk:43967'
+    implementation 'com.github.getActivity:XXPermissions:13.6'
     implementation fileTree(dir: 'libs', include: ['*.aar', '*.jar'], exclude: [])
+    implementation project(path: ':tbsreader')
 }

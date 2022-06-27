@@ -3,3 +3,4 @@
 //include ':imsdk'
 include ':app'
 rootProject.name = "starIm"
+include ':tbsreader'
