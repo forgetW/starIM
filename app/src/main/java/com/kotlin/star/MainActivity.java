@@ -9,6 +9,7 @@ import com.hjq.permissions.OnPermissionCallback;
 import com.hjq.permissions.Permission;
 import com.hjq.permissions.XXPermissions;
 import com.kotlin.tbsreader.TbsReader;
+import com.kotlin.tbsreader.callback.X5PreInitCallback;
 
 import java.util.List;
 
@@ -41,8 +42,11 @@ public class MainActivity extends AppCompatActivity {
 
         findViewById(R.id.button).setOnClickListener(v -> {
             int tbsVersion = SpUtils.getInt(SpUtils.TBS_VERSION, 0);
-            Log.d(App.TAG,"TbsReader-app--sp--tbsVersion--"  + tbsVersion);
-            TbsReader.getInstance().instalCore(App.getWitApplication());
+            Log.d(App.TAG,"TbsReader-app--SpUtils--tbsVersion--"  + tbsVersion);
+            TbsReader.getInstance().instalCore(App.getWitApplication(), (initFinished, version) -> {
+                SpUtils.putInt(SpUtils.TBS_VERSION, version);
+                Log.d(App.TAG,"TbsReader-app--instalCore--tbsVersion--"  + version);
+            });
         });
     }
 }
