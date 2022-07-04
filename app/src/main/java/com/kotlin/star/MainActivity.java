@@ -4,11 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import com.hjq.permissions.OnPermissionCallback;
 import com.hjq.permissions.Permission;
 import com.hjq.permissions.XXPermissions;
 import com.kotlin.tbsreader.TbsReader;
+import com.kotlin.tbsreader.activity.FilePreActivity;
 import com.kotlin.tbsreader.callback.X5PreInitCallback;
 
 import java.util.List;
@@ -37,16 +39,28 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onGranted(List<String> permissions, boolean all) {
                         Log.e(App.TAG, "onGranted: " + permissions.toString());
+                        TbsReader.getInstance().qbsInit(MainActivity.this);
                     }
                 });
 
-        findViewById(R.id.button).setOnClickListener(v -> {
-            int tbsVersion = SpUtils.getInt(SpUtils.TBS_VERSION, 0);
-            Log.d(App.TAG,"TbsReader-app--SpUtils--tbsVersion--"  + tbsVersion);
-            TbsReader.getInstance().instalCore(App.getWitApplication(), (initFinished, version) -> {
-                SpUtils.putInt(SpUtils.TBS_VERSION, version);
-                Log.d(App.TAG,"TbsReader-app--instalCore--tbsVersion--"  + version);
-            });
+        findViewById(R.id.init).setOnClickListener(v -> {
+            boolean canLoad = TbsReader.getInstance().canLoadX5(MainActivity.this);
+            int version = TbsReader.getInstance().getTbsVersion(MainActivity.this);
+            Log.e(App.TAG, "canLoadX5: " + canLoad);
+            Log.e(App.TAG, "TbsVersion: " + version);
+        });
+        findViewById(R.id.preview).setOnClickListener(v -> {
+            String file = "https://zhdjfile.nmgdj.gov.cn/nmg/%E5%B9%B3%E5%8F%B0%E9%97%AE%E9%A2%98%E5%8F%8D%E9%A6%88%E8%A1%A8%EF%BC%88%E7%BB%84%E7%BB%87%E5%90%8D%E7%A7%B0%EF%BC%89.xlsx";
+            FilePreActivity.show(MainActivity.this, file);
+        });
+    }
+
+    private void initTbs() {
+        int tbsVersion = SpUtils.getInt(SpUtils.TBS_VERSION, 0);
+        Log.d(App.TAG, "TbsReader-app--SpUtils--tbsVersion--" + tbsVersion);
+        TbsReader.getInstance().instalCore(App.getWitApplication(), (initFinished, version) -> {
+            SpUtils.putInt(SpUtils.TBS_VERSION, version);
+            Log.d(App.TAG, "TbsReader-app--instalCore--tbsVersion--" + version);
         });
     }
 }

@@ -33,7 +33,7 @@ public class App extends Application {
             if (defaultProcess) {
                 int tbsVersion = SpUtils.getInt(SpUtils.TBS_VERSION, 0);
                 if (tbsVersion == 0) {
-                    TbsReader.getInstance().localInit(this, "tbscore");
+                    //TbsReader.getInstance().localInit(this, "tbscore");
                 }
             }
         }

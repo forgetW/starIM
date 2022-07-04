@@ -105,6 +105,46 @@ public class TbsFileUtils {
         return copyFilesFromAssets(context, folder, newPath);
     }
 
+    public static String tbsFilePath(){
+        return  ExceptionHandler.fileDownloadPath + "/Download/";
+    }
+
+    /**
+     * 把asset的文件转化为本地文件
+     *
+     * @param context 上下文对象
+     * @param oldPath 旧的文件路径
+     * @param newPath 新的文件路径
+     */
+    public static boolean copyAssets(Context context, String oldPath, String newPath) {
+        try {
+            String fileNames[] = context.getAssets().list(oldPath);// 获取assets目录下的所有文件及目录名
+            if (fileNames.length > 0) {// 如果是目录
+                File file = new File(newPath);
+                file.mkdirs();// 如果文件夹不存在，则递归
+                for (String fileName : fileNames) {
+                    copyAssets(context, oldPath + "/" + fileName, newPath + "/" + fileName);
+                }
+            } else {// 如果是文件
+                InputStream is = context.getAssets().open(oldPath);
+                FileOutputStream fos = new FileOutputStream(new File(newPath));
+                byte[] buffer = new byte[1024];
+                int byteCount;
+                while ((byteCount = is.read(buffer)) != -1) {// 循环从输入流读取
+                    // buffer字节
+                    fos.write(buffer, 0, byteCount);// 将读取的输入流写入到输出流
+                }
+                fos.flush();// 刷新缓冲区
+                is.close();
+                fos.close();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
     public static void copyfile(Context context, String filepath, String fileName, String assetsName) {
         try {
             if (!new File(filepath + "/" + fileName).exists()) {

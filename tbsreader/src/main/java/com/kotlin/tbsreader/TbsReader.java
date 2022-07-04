@@ -1,7 +1,9 @@
 package com.kotlin.tbsreader;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.os.FileUtils;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -44,7 +46,55 @@ public class TbsReader {
         return X5Init;
     }
 
-    private boolean X5Init = false;
+    public boolean canLoadX5(Context context) {
+        boolean canLoadX5 = QbSdk.canLoadX5(context);
+        return canLoadX5;
+    }
+
+
+    public void qbsInit(Context context) {
+        X5Init = QbSdk.canLoadX5(context);
+        if (!X5Init || QbSdk.getTbsVersion(context) < 46007) {
+            TbsFileUtils.copyAssets(context, "046007_x5.tbs.apk", TbsFileUtils.tbsFilePath() + "/046007_x5.tbs.apk");
+        }
+
+        HashMap<String, Object> map = new HashMap<>(2);
+        map.put(TbsCoreSettings.TBS_SETTINGS_USE_SPEEDY_CLASSLOADER, true);
+        map.put(TbsCoreSettings.TBS_SETTINGS_USE_DEXLOADER_SERVICE, true);
+        QbSdk.initTbsSettings(map);
+
+        boolean canLoadX5 = QbSdk.canLoadX5(context);
+        Log.e(TAG, "canLoadX5: " + canLoadX5 + "|TbsVersion:" + QbSdk.getTbsVersion(context));
+        if (canLoadX5) {
+            return;
+        }
+        QbSdk.reset(context);
+        QbSdk.setTbsListener(new TbsListener() {
+            @Override
+            public void onDownloadFinish(int i) {
+
+            }
+
+            @Override
+            public void onInstallFinish(int i) {
+                Log.e(TAG, "onInstallFinish: " + i);
+                int tbsVersion = QbSdk.getTbsVersion(context);
+                Log.e(TAG, "tbsVersion: " + tbsVersion);
+            }
+
+            @Override
+            public void onDownloadProgress(int i) {
+
+            }
+        });
+        QbSdk.reset(context);
+        QbSdk.installLocalTbsCore(context, 46007,  TbsFileUtils.tbsFilePath() + "/046007_x5.tbs.apk");
+
+        int a = QbSdk.getTbsVersion(context);
+        Log.e(TAG, "getTbsVersion111111: " + a);
+    }
+
+    private boolean X5Init;
     private boolean loading = false;
 
     public void setLoadX5Progress(LoadX5Progress loadX5Progress) {
@@ -73,6 +123,7 @@ public class TbsReader {
             public void onDownloadFinish(int stateCode) {
                 Log.i(TAG, "Core onDownloadFinish: " + stateCode);
             }
+
             /**
              * @param i 200、232安装成功
              */
@@ -80,6 +131,7 @@ public class TbsReader {
             public void onInstallFinish(int i) {
                 Log.i(TAG, "Core onInstallFinish: " + i);
             }
+
             /**
              * 首次安装应用，会触发内核下载，此时会有内核下载的进度回调。
              * @param progress 0 - 100
@@ -121,11 +173,11 @@ public class TbsReader {
         return copy;
     }
 
-    public void instalCore(Context context){
+    public void instalCore(Context context) {
         initX5Env(context);
     }
 
-    public void instalCore(Context context, X5PreInitCallback x5PreInitCallback){
+    public void instalCore(Context context, X5PreInitCallback x5PreInitCallback) {
         initX5Env(context, x5PreInitCallback);
     }
 
